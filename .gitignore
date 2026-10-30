@@ -1,0 +1,17 @@
+node_modules/
+tools/python/
+sources/
+
+data/
+.env
+.env.*
+!.env.example
+
+# Local logs, editor files and generated review screenshots
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+preview*.png
+*.pem
+*.key

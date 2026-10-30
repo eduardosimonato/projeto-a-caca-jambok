@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#22271e">
+  <title>Senta a Pua! — Brasil nos céus da Itália</title>
+  <link rel="stylesheet" href="styles.css?v=architecture"><link rel="stylesheet" href="auth.css"><script defer src="js/auth.js"></script>
+  <script defer src="vendor/three.min.js"></script>
+  <script defer src="js/config.js?v=messerschmitt"></script><script defer src="js/media.js"></script>
+  <script defer src="js/input.js"></script><script defer src="js/audio.js"></script>
+  <script defer src="js/aircraft.js"></script><script defer src="js/fw190.js?v=opaque-wings"></script><script defer src="js/axis-aircraft.js"></script><script defer src="js/architecture.js"></script><script defer src="js/renderer.js?v=mountain-clearance"></script>
+  <script defer src="js/game.js?v=messerschmitt"></script><script defer src="js/main.js"></script>
+</head>
+<body>
+<main class="shell">
+  <header class="masthead">
+    <a class="brand" href="index.html"><img src="assets/senta-a-pua.png" alt="Distintivo Senta a Pua"><span>FORÇA AÉREA BRASILEIRA<small>1º GRUPO DE AVIAÇÃO DE CAÇA</small></span></a>
+    <div class="theater"><span class="flag" aria-label="Brasil">◆</span><span>TEATRO DE OPERAÇÕES<br><b>ITÁLIA · 1944–1945</b></span></div>
+    <div class="audio-controls"><button id="sound" class="quiet" aria-pressed="false">Som: desligado</button><label for="volume">Volume <output id="volume-value">65%</output></label><input id="volume" type="range" min="0" max="100" value="65" aria-label="Volume dos efeitos sonoros"><span id="sound-status" class="audio-status" role="status">Motor e rajadas: áudio gravado</span></div>
+  </header>
+  <div class="account-bar"><span id="account-name">Verificando acesso…</span><button id="account-password" class="quiet" hidden>Alterar senha</button><button id="account-logout" class="quiet" hidden>Sair da conta</button></div>
+  <dialog id="password-dialog" class="account-dialog"><h2>Alterar senha</h2><form id="password-form"><label>Senha atual<input id="current-password" type="password" autocomplete="current-password" maxlength="128" required></label><label>Nova senha<input id="new-password" type="password" autocomplete="new-password" minlength="12" maxlength="128" required></label><button class="primary" type="submit">Salvar senha</button><button id="password-close" class="quiet" type="button">Fechar</button></form><p id="password-message" role="status"></p></dialog>
+  <section class="heading"><div><p class="eyebrow">BRASIL NOS CÉUS DA ITÁLIA</p><h1>Senta a <em>Pua!</em></h1></div><div class="heading-note"><span>JAMBOCK / P-47D THUNDERBOLT</span><p>Um tributo em forma de jogo.<br>Coragem brasileira. Asas sobre a Itália.</p></div></section>
+  <div class="layout">
+    <section class="flight-panel" aria-label="Área do jogo">
+      <div class="hud"><div><span>PONTOS</span><strong id="score">000000</strong></div><div class="meter-block"><label for="health">INTEGRIDADE <b id="health-value">100%</b></label><meter id="health" min="0" max="100" value="100"></meter></div><div class="meter-block"><label for="fuel">COMBUSTÍVEL <b id="fuel-value">100%</b></label><meter id="fuel" min="0" max="100" value="100"></meter></div><button id="pause" class="quiet" disabled>Pausar · P</button></div>
+      <div class="viewport">
+        <canvas id="game" width="720" height="760" tabindex="0" aria-label="Jogo de avião. WASD ou setas para manobrar, espaço para disparar, Shift para acelerar e P para pausar."></canvas>
+        <div class="map-label"><span id="map-mission">MISSÃO 01 / VALE AURORA</span><span>ITÁLIA · CENÁRIO FICTÍCIO</span></div>
+        <div id="overlay" class="overlay"><div class="briefing"><span class="tag" id="screen-tag">ORDEM DE MISSÃO / 001</span><h2 id="screen-title">À caça,<br>Jambock.</h2><p id="screen-copy">Leve o P-47D ao vale. Ataque os depósitos, enfrente as patrulhas e volte para casa.</p><div id="brief-stats" class="brief-stats"><span><b>75 s</b>DE INCURSÃO</span><span><b>4 alvos</b>TERRESTRES</span><span><b>B4</b>SUA AERONAVE</span></div><button id="start" class="primary">Decolar <span>↗</span></button><p class="small" id="screen-hint">WASD ou setas · Espaço para disparar</p></div></div>
+        <div id="notice" class="notice" role="status" aria-live="polite"></div>
+      </div>
+      <div class="flight-footer"><span><i></i><span id="flight-state">AGUARDANDO PILOTO</span></span><span>BRASIL <b>★</b> 1º GAvCa</span></div>
+    </section>
+    <aside>
+      <section class="aircraft card"><div class="card-top"><p class="eyebrow">RECONHECIMENTO DA AERONAVE</p><span class="serial" id="aircraft-code">B4</span></div><div class="preview-footer"><button id="inspect-player" class="quiet" aria-pressed="true">Seu P-47D</button><button id="inspect-enemy" class="quiet" aria-pressed="false">Inimigo Fw 190</button><button id="inspect-bf109" class="quiet" aria-pressed="false">Bf 109</button><button id="inspect-me262" class="quiet" aria-pressed="false">Me 262</button></div><h3 id="aircraft-name">Republic P-47D</h3><p id="aircraft-description" class="aircraft-sub">THUNDERBOLT · CABINE EM BOLHA</p><canvas id="aircraft-preview" width="580" height="320" aria-label="Modelo tridimensional do P-47D. Arraste para girar ou use o botão Girar avião."></canvas><div class="preview-footer"><span>Arraste para inspecionar</span><button id="rotate-aircraft" class="quiet">Girar avião ↻</button><button id="expand-aircraft" class="quiet" aria-expanded="false">Ampliar</button></div><dl><div><dt>PINTURA</dt><dd id="aircraft-paint">Oliva / cinza inferior</dd></div><div><dt>IDENTIDADE</dt><dd id="aircraft-identity">Marcas brasileiras</dd></div></dl></section>
+      <section class="card mission"><p class="eyebrow">CADERNETA DE OPERAÇÕES</p><h2 id="mission-name">Operação Aurora</h2><p id="mission-description">Uma missão fictícia inspirada no apoio aéreo brasileiro na campanha da Itália.</p><div class="objective"><span class="number">01</span><div>Neutralize os depósitos<strong id="targets">0 / 4</strong></div></div><div class="objective"><span class="number">02</span><div>Sobreviva até a extração<strong id="time">75 s</strong></div></div><div class="progress"><div id="mission-progress"></div></div><p class="note" id="mission-note">Procure as molduras amarelas. Há seis alvos disponíveis para cumprir quatro.</p></section>
+      <section class="card controls"><p class="eyebrow">INSTRUÇÕES DE VOO</p><div><span><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></span><span>Manobrar</span></div><p class="note">ou use as setas do teclado</p><div><kbd>ESPAÇO</kbd><span>Metralhadoras</span></div><div><kbd>SHIFT</kbd><span>Acelerar</span></div><div><kbd>P / ESC</kbd><span>Pausar</span></div></section>
+    </aside>
+  </div>
+  <section class="history-strip"><img src="assets/senta-a-pua.png" alt=""><div><p class="eyebrow">MEMÓRIA DA AVIAÇÃO BRASILEIRA</p><h2>Uma história que merece ser lembrada.</h2><p>O 1º Grupo de Aviação de Caça combateu na Itália com o P-47. Este projeto pessoal se inspira nessa história; a missão e a paisagem são fictícias.</p></div><a href="https://museuvirtualdafeb.eb.mil.br/a-fab/" target="_blank" rel="noopener">Conheça a história ↗</a></section>
+  <footer class="page-footer"><span>PROJETO PESSOAL · SEM VÍNCULO INSTITUCIONAL</span><span><a href="CREDITOS.html">Fontes, áudio e créditos</a> / <a href="cenarios.html">Inspecionar construções</a> <b>/</b> <a href="../p47-aurora/index.html">Versão 2D ↗</a></span></footer>
+  <p class="sr-only" id="announcement" aria-live="polite"></p>
+</main>
+</body></html>

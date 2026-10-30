@@ -1,0 +1,24 @@
+{
+  "name": "p47-aurora-3d",
+  "version": "1.0.0",
+  "description": "Arcade 3D inspirado no P-47D da FAB, com modelo curvo e Ã¡udio por amostras",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "node --test tests/game.test.cjs tests/audio.test.cjs tests/scene3d.test.cjs tests/auth.test.cjs",
+    "build:vendor": "esbuild tools/three-entry.js --bundle --format=iife --global-name=THREE --minify --outfile=vendor/three.min.js",
+    "start": "node server.cjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "google-auth-library": "^10.9.1",
+    "three": "0.180.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.10"
+  }
+}
