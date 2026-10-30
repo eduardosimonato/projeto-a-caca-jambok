@@ -1,6 +1,8 @@
 # À caça
 
-Repositório local do jogo **Senta a Pua!**, versão 3D.
+Projeto pessoal de criação de um jogo com tema da Segunda Guerra Mundial, inspirado no P-47 da Senta a Pua, desenvolvido com o Codex.
+
+Repositório: [projeto-a-caca-jambok](https://github.com/eduardosimonato/projeto-a-caca-jambok). Jogo **Senta a Pua!**, versão 3D.
 
 Abra `index.html` no navegador. Os scripts, o Three.js, as texturas e as gravações ficam no projeto; jogar não exige internet nem instalação. Requer navegador com WebGL 2 e aceleração gráfica.
 
